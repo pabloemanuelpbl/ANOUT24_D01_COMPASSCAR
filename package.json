@@ -1,5 +1,5 @@
 {
-  "name": "ANOUT24_D01_COMPASSCAR",
+  "name": "compasscar",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^9.14.0",
+    "jest": "^29.7.0",
+    "prettier": "3.3.3"
+  }
 }
