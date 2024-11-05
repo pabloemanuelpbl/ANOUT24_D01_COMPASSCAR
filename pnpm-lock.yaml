@@ -18,9 +18,15 @@ importers:
         specifier: ^3.11.3
         version: 3.11.3
     devDependencies:
+      '@eslint/js':
+        specifier: ^9.14.0
+        version: 9.14.0
       eslint:
         specifier: ^9.14.0
         version: 9.14.0
+      globals:
+        specifier: ^15.12.0
+        version: 15.12.0
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.9.0)
@@ -866,6 +872,10 @@ packages:
 
   globals@14.0.0:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
+    engines: {node: '>=18'}
+
+  globals@15.12.0:
+    resolution: {integrity: sha512-1+gLErljJFhbOVyaetcwJiJ4+eLe45S2E7P5UiZ9xGfeq3ATQf5DOv9G7MH3gGbKQLkzmNh2DxfZwLdw+j6oTQ==}
     engines: {node: '>=18'}
 
   gopd@1.0.1:
@@ -2719,6 +2729,8 @@ snapshots:
   globals@11.12.0: {}
 
   globals@14.0.0: {}
+
+  globals@15.12.0: {}
 
   gopd@1.0.1:
     dependencies:
