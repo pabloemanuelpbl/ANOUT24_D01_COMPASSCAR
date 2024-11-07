@@ -29,22 +29,35 @@ describe("POST /api/v1/cars", () => {
       //year: 2018,
       //plate: "ABC-1D23",
     });
+
     expect(result.status).toBe(400);
+    expect(result.body.errors.length).toBe(4);
     expect(result.body.errors[0]).toBe("brand is required");
     expect(result.body.errors[1]).toBe("model is required");
     expect(result.body.errors[2]).toBe("year is required");
     expect(result.body.errors[3]).toBe("plate is required");
-    expect(result.body.errors[4]).toBe(
-      "plate must be in the correct format ABC-1C34"
-    );
   });
 
   test("with a year below the required ", async () => {
     const result = await request.post("/api/v1/cars").send({
-      brand: "Marca",
+      brand: "debug",
       model: "Modelo",
       year: 2010,
-      plate: "ABC-1D24",
+      plate: "ACC-1C34",
+    });
+
+    console.log(result.body);
+    expect(result.status).toBe(400);
+    expect(result.body.errors.length).toBe(1);
+    expect(result.body.errors[0]).toBe("year must be between 2015 and 2025");
+  });
+
+  test("with the year above the required", async () => {
+    const result = await request.post("/api/v1/cars").send({
+      brand: "Marca",
+      model: "Modelo",
+      year: 2030,
+      plate: "ABC-1D20",
     });
 
     expect(result.status).toBe(400);
@@ -67,7 +80,7 @@ describe("POST /api/v1/cars", () => {
     );
   });
 
-  test("with invalid plate format", async () => {
+  test("with license plate already registered", async () => {
     const result = await request.post("/api/v1/cars").send({
       brand: "Marca",
       model: "Modelo",
@@ -76,5 +89,7 @@ describe("POST /api/v1/cars", () => {
     });
 
     expect(result.status).toBe(409);
+    expect(result.body.errors.length).toBe(1);
+    expect(result.body.errors[0]).toBe("car already registered");
   });
 });
