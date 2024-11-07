@@ -23,7 +23,7 @@ function carRegistrationContoller(
 
     const alreadyRegistered = await carAlreadyRegistered(request.body.plate);
     if (alreadyRegistered)
-      return response.status(409).json({ error: ["car already registered"] });
+      return response.status(409).json({ errors: ["car already registered"] });
 
     carRegistrationCallback(request.body)
       .then((result) => {
