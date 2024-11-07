@@ -1,9 +1,8 @@
 const { Router } = require("express");
+const { carRegistrationContoller } = require("./useCases/carRegistration");
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.status(200).send("hello world");
-});
+router.post("/api/v1/cars", carRegistrationContoller.handle);
 
 module.exports = { router };
