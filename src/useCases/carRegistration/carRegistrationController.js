@@ -1,3 +1,5 @@
+const carAlreadyRegistered = require("./carAlreadyRegistered");
+
 /**
  * @typedef {import('express').request} Request
  * @typedef {import('express').response} Response
@@ -14,14 +16,18 @@ function carRegistrationContoller(
    * @param {Request} request
    * @param {Response} response
    */
-  function handle(request, response) {
+  async function handle(request, response) {
     const errors = carErrorHandlerCallback(request.body);
 
     if (errors.length > 0) return response.status(400).json({ errors });
 
+    const alreadyRegistered = await carAlreadyRegistered(request.body.plate);
+    if (alreadyRegistered)
+      return response.status(409).json({ error: ["car already registered"] });
+
     carRegistrationCallback(request.body)
-      .then(() => {
-        return response.status(204).json();
+      .then((result) => {
+        return response.status(201).json(result);
       })
       .catch(() => {
         return response.status(500).json({

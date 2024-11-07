@@ -8,8 +8,8 @@ function carRegistrationErrorHandle(newCar) {
   let errors = [];
   if (!newCar.brand) errors.push("brand is required");
   if (!newCar.model) errors.push("model is required");
-  if (!newCar.plate) errors.push("plate is required");
   if (!newCar.year) errors.push("year is required");
+  if (!newCar.plate) errors.push("plate is required");
   if (newCar.year < 2015 || newCar.year > 2025) {
     errors.push("year must be between 2015 and 2025");
   }
