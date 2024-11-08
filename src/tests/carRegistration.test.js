@@ -2,7 +2,15 @@ const { session } = require("../../knex");
 const { request } = require("./testConfig");
 
 beforeAll(async () => {
-  await session("cars").delete().where({ plate: "ABC-1D23" });
+  try {
+    const [[car]] = await session.raw(
+      "SELECT id FROM cars WHERE plate = 'ABC-1D00'"
+    );
+    await session.raw(`DELETE FROM cars_items WHERE car_id = ${car.id}`);
+    await session.raw(`DELETE FROM cars WHERE id = ${car.id}`);
+  } catch {
+    return;
+  }
 });
 
 describe("POST /api/v1/cars", () => {
@@ -11,7 +19,7 @@ describe("POST /api/v1/cars", () => {
       brand: "Marca",
       model: "Modelo",
       year: 2018,
-      plate: "ABC-1D23",
+      plate: "ABC-1D00",
     });
     expect(result.status).toBe(201);
     expect(result.body).toHaveProperty("id");
@@ -38,7 +46,7 @@ describe("POST /api/v1/cars", () => {
     expect(result.body.errors[3]).toBe("plate is required");
   });
 
-  test("with a year below the required ", async () => {
+  test("with a year below the required", async () => {
     const result = await request.post("/api/v1/cars").send({
       brand: "debug",
       model: "Modelo",
@@ -46,7 +54,6 @@ describe("POST /api/v1/cars", () => {
       plate: "ACC-1C34",
     });
 
-    console.log(result.body);
     expect(result.status).toBe(400);
     expect(result.body.errors.length).toBe(1);
     expect(result.body.errors[0]).toBe("year must be between 2015 and 2025");
@@ -85,7 +92,7 @@ describe("POST /api/v1/cars", () => {
       brand: "Marca",
       model: "Modelo",
       year: 2018,
-      plate: "ABC-1D23",
+      plate: "ABC-1D00",
     });
 
     expect(result.status).toBe(409);
