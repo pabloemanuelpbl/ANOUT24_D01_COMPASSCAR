@@ -17,7 +17,7 @@ function repositoryCarsItems(databaseSession) {
    * @param {id: number} carId
    * @param {string} [select="*"]
    */
-  function findOne(carId, select = "*") {
+  function find(carId, select = "*") {
     return databaseSession(table)
       .join("cars", "cars_items.car_id", "cars.id")
       .select(select)
@@ -29,7 +29,7 @@ function repositoryCarsItems(databaseSession) {
     return databaseSession(table).delete().where(filter);
   }
 
-  return { deleteWhere, findOne, save };
+  return { deleteWhere, find, save };
 }
 
 module.exports = { repositoryCarsItems: repositoryCarsItems(session) };
