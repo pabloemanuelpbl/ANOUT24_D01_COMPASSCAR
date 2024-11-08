@@ -24,7 +24,12 @@ function repositoryCarsItems(databaseSession) {
       .where({ "cars.id": carId });
   }
 
-  return { findOne, save };
+  /** @param {{car_id: number}|{id: number}} filter */
+  function deleteWhere(filter) {
+    return databaseSession(table).delete().where(filter);
+  }
+
+  return { deleteWhere, findOne, save };
 }
 
 module.exports = { repositoryCarsItems: repositoryCarsItems(session) };
