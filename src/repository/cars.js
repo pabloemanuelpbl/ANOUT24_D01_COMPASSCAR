@@ -17,7 +17,7 @@ function repositoryCars(databaseSession) {
     });
   }
 
-  /** @param {ICar & ICarAltoincrements} [filter={}]   */
+  /**@param {ICar & ICarAltoincrements} [filter={}]   */
   function find(filter = {}) {
     return databaseSession(table).where(filter).select("*");
   }
@@ -27,7 +27,12 @@ function repositoryCars(databaseSession) {
     return databaseSession(table).where(filter).first();
   }
 
-  return { save, find, findOne };
+  /**@param {ICar & ICarAltoincrements} filter  */
+  function deleteWhere(filter) {
+    return databaseSession(table).delete().where(filter);
+  }
+
+  return { save, find, findOne, deleteWhere };
 }
 
 module.exports = { repositoryCars: repositoryCars(session) };
