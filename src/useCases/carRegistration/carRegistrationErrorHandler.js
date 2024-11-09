@@ -1,4 +1,4 @@
-const carPlateRegex = /^[A-Z]{3}-[0-9][A-J,0-9][0-9]{2}$/;
+const carPlateRegex = require("../utils/carPlateRegex");
 
 /** @typedef {import("./carRegistration").ICar} ICar */
 
@@ -13,7 +13,7 @@ function carRegistrationErrorHandle(newCar) {
   if (newCar.year < 2015 || newCar.year > 2025) {
     errors.push("year must be between 2015 and 2025");
   }
-  if (newCar.plate && !carPlateRegex.test(newCar.plate))
+  if (newCar.plate && !carPlateRegex(newCar.plate))
     errors.push("plate must be in the correct format ABC-1C34");
 
   return errors;
