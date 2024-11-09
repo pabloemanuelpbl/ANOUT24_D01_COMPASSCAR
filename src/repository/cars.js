@@ -32,7 +32,15 @@ function repositoryCars(databaseSession) {
     return databaseSession(table).delete().where(filter);
   }
 
-  return { save, find, findOne, deleteWhere };
+  /**
+   * @param {ICar & ICarAltoincrements} filter
+   * @param {ICar} update
+   */
+  function updateWhere(filter, update) {
+    return databaseSession(table).update(update).where(filter);
+  }
+
+  return { save, find, findOne, deleteWhere, updateWhere };
 }
 
 module.exports = { repositoryCars: repositoryCars(session) };
