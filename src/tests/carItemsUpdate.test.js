@@ -1,13 +1,21 @@
-const { session } = require("../../knex");
+const { repositoryCars } = require("../repository/cars");
 const { request } = require("./testConfig");
 
 let carId;
-beforeAll(async () => {
-  const [[car]] = await session.raw(
-    "SELECT id FROM cars WHERE plate = 'ABC-1D00'"
-  );
+beforeAll(() => {
+  return repositoryCars
+    .findOne({ plate: "ABC-1D01" })
+    .then((result) => (carId = result.id))
+    .catch(async () => {
+      const [id] = await repositoryCars.save({
+        brand: "car find test",
+        model: "car find test",
+        plate: "ABC-1D01",
+        year: 2022,
+      });
 
-  carId = car.id;
+      carId = id;
+    });
 });
 
 describe("PUT /api/v1/cars/:id/items", () => {
