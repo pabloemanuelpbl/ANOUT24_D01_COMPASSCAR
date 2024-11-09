@@ -2,7 +2,7 @@ const { repositoryCars } = require("../../repository/cars");
 
 /**
  * @param {number} carId
- * @returns {boolean}
+ * @returns {Promise<boolean>}
  */
 async function ifTheCarIsRegistered(carId) {
   const result = await repositoryCars.findOne({ id: carId });
