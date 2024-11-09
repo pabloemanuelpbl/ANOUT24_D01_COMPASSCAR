@@ -24,7 +24,7 @@ function repositoryCarsItems(databaseSession) {
       .where({ "cars.id": carId });
   }
 
-  /** @param {{car_id: number}|{id: number}} filter */
+  /** @param {ICarItems & ICarItemsAltoincrements} filter */
   function deleteWhere(filter) {
     return databaseSession(table).delete().where(filter);
   }
