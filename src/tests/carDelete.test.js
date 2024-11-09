@@ -34,15 +34,13 @@ beforeAll(() => {
 
 describe("DELETE /api/v1/cars/:id", () => {
   test("deleting with existing user (successfully)", async () => {
-    const result = await request.get(`/api/v1/cars/${carId}`);
-
+    const result = await request.delete(`/api/v1/cars/${carId}`);
     expect(result.status).toBe(204);
-    console.log(result.body);
+    expect(Object.keys(result.body).length).toBe(0);
   });
 
   test("deleting with non-existent user", async () => {
-    const result = await request.get("/api/v1/cars/99999999999");
-
+    const result = await request.delete("/api/v1/cars/99999999999");
     expect(result.status).toBe(404);
     expect(result.body).toHaveProperty("errors");
     expect(result.body.errors.length).toBe(1);
