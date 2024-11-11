@@ -7,9 +7,8 @@
     "start": "node --watch src/server.js",
     "lint": "eslint .",
     "prettier": "prettier --write .",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:watch:verbose": "jest --watch --verbose"
+    "test": "jest --verbose --detectOpenHandles",
+    "test:watch": "jest --watch --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
