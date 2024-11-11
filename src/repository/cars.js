@@ -32,6 +32,12 @@ function repositoryCars(databaseSession) {
     return databaseSession(table).delete().where(filter);
   }
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+  return { save, find, findOne, deleteWhere };
+=======
+>>>>>>> Stashed changes
   /**
    * @param {ICar & ICarAltoincrements} filter
    * @param {ICar} update
@@ -40,7 +46,23 @@ function repositoryCars(databaseSession) {
     return databaseSession(table).update(update).where(filter);
   }
 
+<<<<<<< Updated upstream
   return { save, find, findOne, deleteWhere, updateWhere };
+=======
+  /**
+   * @param {string} [select="*"]
+   * @param {string} [whereRaw="id"]
+   */
+  function count(whereRaw = "id", select = "*") {
+    return session("cars")
+      .whereRaw(whereRaw)
+      .count(select, { as: "count" })
+      .then(([result]) => result.count);
+  }
+
+  return { save, find, findOne, deleteWhere, updateWhere, count };
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 }
 
 module.exports = { repositoryCars: repositoryCars(session) };
