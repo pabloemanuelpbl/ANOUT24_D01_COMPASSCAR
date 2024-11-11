@@ -22,7 +22,9 @@ npm install
 No arquivo .env ponha as credenciais do banco de dados
 
 > MYSQL_HOST=localhost
+
 > MYSQL_USER=root
+
 > MYSQL_PASSWORD=local_password
 
 migrations
