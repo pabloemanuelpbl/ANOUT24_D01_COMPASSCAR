@@ -3,7 +3,6 @@ const { request } = require("./testConfig");
 
 beforeAll(async () => {
   const countResult = await repositoryCars.count('model = "carListTest"');
-  console.log(countResult);
   if (countResult < 5) {
     await repositoryCars.save({
       brand: "carListTest_hon",
@@ -87,7 +86,6 @@ describe("GET  /api/v1/cars", () => {
 
   test("with the brand parameter (successfully)", async () => {
     const result = await request.get("/api/v1/cars?brand=hon");
-    console.log(result.body);
 
     expect(result.status).toBe(200);
     expect(result.body).toHaveProperty("count");
@@ -99,7 +97,6 @@ describe("GET  /api/v1/cars", () => {
 
   test("with the final_plate parameter (successfully)", async () => {
     const result = await request.get("/api/v1/cars?brand=0");
-    console.log(result.body);
 
     expect(result.status).toBe(200);
     expect(result.body).toHaveProperty("count");
